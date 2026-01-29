@@ -1,6 +1,9 @@
 import random
 
-vibor_bota = random.randint(1, 10)
+max_number = 10
+min_number = 1
+vibor_bota = random.randint(min_number, max_number)
+max_trys = 5
 trys = 5
 
 while True:
@@ -9,21 +12,28 @@ while True:
     else:
         print("Кончились попытки, лох")
         break
-        
-    try:
-        vibor_chela = int(input("🌚Выбери число🌚 "))
-    except:
-        print("Инвалид")
-        break
-        
+    
+    while True:
+        try:
+            vibor_chela = int(input("🌚Выбери число🌚 "))
+            
+            if vibor_chela > max_number or vibor_chela < min_number:
+                print(f"Пожалуйста, выберите число от {min_number} до {max_number}")
+                continue
+            else:
+                break
+                
+        except ValueError:
+            print("Инвалид")
+            continue
+    
     if vibor_chela == vibor_bota:
         print("Попеда еблан")
-        vibor_bota = random.randint(1, 10)
-        trys = 5
+        vibor_bota = random.randint(min_number, max_number)
+        trys = max_trys
     else:
         trys -= 1
         if vibor_chela > vibor_bota:
             print("Меньше")
         else:
-            if vibor_chela < vibor_bota:
-                print("Больше")    
+            print("Больше")
